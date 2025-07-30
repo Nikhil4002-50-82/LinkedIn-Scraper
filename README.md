@@ -30,8 +30,7 @@ linkedin-scraper/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/linkedin-scraper.git
-cd linkedin-scraper
+git clone https://github.com/Nikhil4002-50-82/LinkedIn-Scraper.git
 ````
 
 ### 2. Backend Setup
