@@ -11,8 +11,8 @@ This project is a Chrome Extension built with React and Tailwind CSS that scrape
 ## Folder Structure
 
 ```
-linkedin-scraper/
-├── chrome-extension-react/  
+Linkedin-Scraper/
+├── client/  
 │   ├── public/
 │   │   ├── manifest.json
 │   │   ├── content.js
@@ -20,7 +20,7 @@ linkedin-scraper/
 │   └── src/
 │       ├── App.jsx
 │       └── ...
-├── linkedin-backend/          # Backend API
+├── server/        
 │   └── index.js
 
 ````
