@@ -9,6 +9,7 @@ This project is a Chrome Extension built with React and Tailwind CSS that scrape
 - Database: PostgreSQL
 
 ## Folder Structure
+
 ```
 
 Linkedin-Scraper/
