@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "LinkedIn Scraper",
+  "version": "1.0",
+  "description": "Scrape LinkedIn profile data",
+  "permissions": ["tabs", "scripting"],
+  "host_permissions": ["https://www.linkedin.com/*"],
+  "icons": {
+    "128": "icon.png"
+  },
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "128": "icon.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.linkedin.com/in/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
