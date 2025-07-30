@@ -99,7 +99,7 @@ The output will be in the `dist/` folder.
 
 ### 5. View Stored Data
 
-Use any PostgreSQL client (such as `psql`, DBeaver, or pgAdmin) to run the following:
+Use pgAdmin to run the following:
 
 ```sql
 SELECT * FROM "Profiles";
