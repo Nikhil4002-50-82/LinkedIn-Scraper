@@ -60,7 +60,7 @@ DB_PORT=5432
 #### Run the Server
 
 ```bash
-nodemon index.js
+npm start
 ```
 
 The server will start at `http://localhost:5000` and automatically create the required `Profiles` table if it does not exist.
@@ -99,7 +99,7 @@ The output will be in the `dist/` folder.
 
 ### 5. View Stored Data
 
-Use any PostgreSQL client (such as `psql`, DBeaver, or pgAdmin) to run the following:
+Use pgAdmin to run the following:
 
 ```sql
 SELECT * FROM "Profiles";
