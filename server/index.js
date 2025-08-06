@@ -21,7 +21,7 @@ const pool = new Pool({
 });
 
 const createTable = async () => {
-  const query = `
+  const profileQuery = `
     CREATE TABLE IF NOT EXISTS profiles (
       id SERIAL PRIMARY KEY,
       name VARCHAR,
@@ -34,31 +34,58 @@ const createTable = async () => {
       created_at TIMESTAMP DEFAULT NOW()
     );
   `;
-  await pool.query(query);
+
+  const interactionsQuery = `
+    CREATE TABLE IF NOT EXISTS interactions (
+      id SERIAL PRIMARY KEY,
+      urn TEXT,
+      postUrl TEXT,
+      author TEXT,
+      content TEXT,
+      action VARCHAR,
+      created_at TIMESTAMP DEFAULT NOW()
+    );
+  `;
+
+  await pool.query(profileQuery);
+  await pool.query(interactionsQuery);
 };
 
 app.post("/api/profiles", async (req, res) => {
-  const { name, url, about, bio, location, followerCount, connectionCount } =
-    req.body;
+  const { name, url, about, bio, location, followerCount, connectionCount } = req.body;
   try {
     const query = `
-  INSERT INTO profiles (name, url, about, bio, location, followerCount, connectionCount)
-  VALUES ($1, $2, $3, $4, $5, $6, $7)
-  RETURNING *;
-`;
-    const values = [
-      name,
-      url,
-      about,
-      bio,
-      location,
-      followerCount,
-      connectionCount,
-    ];
+      INSERT INTO profiles (name, url, about, bio, location, followerCount, connectionCount)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      RETURNING *;
+    `;
+    const values = [name, url, about, bio, location, followerCount, connectionCount];
     const result = await pool.query(query, values);
     res.json(result.rows[0]);
   } catch (err) {
     console.error("Error saving profile:", err.message);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.post("/api/interactions", async (req, res) => {
+  const { interactions } = req.body;
+  try {
+    const insertPromises = interactions.map(({ urn, postUrl, author, content, action }) => {
+      const query = `
+        INSERT INTO interactions (urn, postUrl, author, content, action)
+        VALUES ($1, $2, $3, $4, $5)
+      `;
+      const values = [urn, postUrl, author, content, action];
+      return pool.query(query, values).catch((err) =>
+        console.error("❌ DB Insert Error:", err.message)
+      );
+    });
+
+    await Promise.all(insertPromises);
+    res.json({ message: "Interactions saved successfully." });
+  } catch (err) {
+    console.error("Error saving interactions:", err.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
