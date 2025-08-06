@@ -18,10 +18,6 @@
     {
       "matches": ["https://www.linkedin.com/in/*"],
       "js": ["content.js"]
-    },
-    {
-      "matches": ["https://www.linkedin.com/feed/*"],
-      "js": ["feed.js"]
     }
   ]
 }
