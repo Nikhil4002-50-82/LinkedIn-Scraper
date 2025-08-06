@@ -60,7 +60,7 @@ DB_PORT=5432
 #### Run the Server
 
 ```bash
-npm start
+nodemon index.js
 ```
 
 The server will start at `http://localhost:5000` and automatically create the required `Profiles` table if it does not exist.
